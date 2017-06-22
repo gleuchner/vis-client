@@ -1,5 +1,6 @@
 package hska.iwi.eShopMaster.controller;
 
+import hska.iwi.eShopMaster.configuration.RestTemplateProvider;
 import hska.iwi.eShopMaster.model.businessLogic.manager.UserManager;
 import hska.iwi.eShopMaster.model.businessLogic.manager.impl.UserManagerImpl;
 import hska.iwi.eShopMaster.model.database.dataobjects.User;
@@ -27,6 +28,9 @@ public class LoginAction extends ActionSupport {
 
 		// Return string:
 		String result = "input";
+
+		//retrieve token
+		RestTemplateProvider.createAndGetOAuth2RestTemplate(getUsername(), getPassword());
 
 		UserManager myCManager = new UserManagerImpl();
 		

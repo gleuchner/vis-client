@@ -5,7 +5,9 @@ import java.util.List;
 
 import hska.iwi.eShopMaster.configuration.RestTemplateProvider;
 import hska.iwi.eShopMaster.model.database.dataobjects.User;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.oauth2.client.OAuth2RestTemplate;
 import org.springframework.security.oauth2.client.resource.OAuth2AccessDeniedException;
 
 import javax.ws.rs.core.Response;
@@ -25,7 +27,13 @@ public class UserDAO  {
 //        }
 
         try {
-            response = RestTemplateProvider.getRestTemplate().getForEntity(USER_BASE_URL + "/names/" + name, User.class);
+            OAuth2RestTemplate restTemplate = RestTemplateProvider.getRestTemplate();
+            User[] users = restTemplate.getForObject(USER_BASE_URL, User[].class);
+            for (User user :users) {
+                if (user.getUsername().equals(name)) {
+                    response = new ResponseEntity<User>(user, HttpStatus.OK);
+                }
+            }
         } catch (OAuth2AccessDeniedException e) {
             if (e.getCause().getMessage().equals("999")) {
                 // return a null user => username not found
