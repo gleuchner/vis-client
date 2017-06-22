@@ -6,13 +6,13 @@ import hska.iwi.eShopMaster.model.database.dataobjects.User;
 
 public interface UserManager {
     
-    public void registerUser(String username, String name, String lastname, String password, Role role);
+    public void registerUser(String username, String name, String lastname, String password, int role);
     
     public User getUserByUsername(String username);
     
     public boolean deleteUserById(int id);
     
-    public Role getRoleByLevel(int level);
+    public int getRoleByLevel(int level);
     
     public boolean doesUserAlreadyExist(String username);
 }

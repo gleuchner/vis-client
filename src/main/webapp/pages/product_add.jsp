@@ -36,7 +36,7 @@
 		</nav>
 		<div class="container">
 			<div class="row">
-				<s:text name="login.status" /> 	${webshop_user.firstname} ${webshop_user.lastname}
+				<s:text name="login.status" /> 	${webshop_user.firstName} ${webshop_user.lastName}
 			</div>
 	
 			<div class="row">
@@ -60,7 +60,7 @@
 								
 						<div class = "form-group">
 							<label>Kategorie*:</label>
-							<s:select name="categoryId" cssClass ="form-control"  list="categories" listKey="id" listValue="name" value="%{categories.{name}}" required="true" />
+							<s:select name="categoryId" cssClass ="form-control"  list="categories" listKey="userId" listValue="name" value="%{categories.{name}}" required="true" />
 						</div>
 						
 						<div class = "form-group">

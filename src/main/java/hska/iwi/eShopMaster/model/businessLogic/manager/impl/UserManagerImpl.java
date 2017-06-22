@@ -1,9 +1,7 @@
 package hska.iwi.eShopMaster.model.businessLogic.manager.impl;
 
 import hska.iwi.eShopMaster.model.businessLogic.manager.UserManager;
-import hska.iwi.eShopMaster.model.database.dataAccessObjects.RoleDAO;
 import hska.iwi.eShopMaster.model.database.dataAccessObjects.UserDAO;
-import hska.iwi.eShopMaster.model.database.dataobjects.Role;
 import hska.iwi.eShopMaster.model.database.dataobjects.User;
 
 /**
@@ -19,7 +17,7 @@ public class UserManagerImpl implements UserManager {
 	}
 
 	
-	public void registerUser(String username, String name, String lastname, String password, Role role) {
+	public void registerUser(String username, String name, String lastname, String password, int role) {
 
 		User user = new User(username, name, lastname, password, role);
 
@@ -36,14 +34,13 @@ public class UserManagerImpl implements UserManager {
 
 	public boolean deleteUserById(int id) {
 		User user = new User();
-		user.setId(id);
+		user.setUserId(id);
 		helper.deleteObject(user);
 		return true;
 	}
 
-	public Role getRoleByLevel(int level) {
-		RoleDAO roleHelper = new RoleDAO();
-		return roleHelper.getRoleByLevel(level);
+	public int getRoleByLevel(int level) {
+		return level;
 	}
 
 	public boolean doesUserAlreadyExist(String username) {
@@ -60,7 +57,7 @@ public class UserManagerImpl implements UserManager {
 	
 
 	public boolean validate(User user) {
-		if (user.getFirstname().isEmpty() || user.getPassword().isEmpty() || user.getRole() == null || user.getLastname() == null || user.getUsername() == null) {
+		if (user.getFirstName().isEmpty() || user.getPassword().isEmpty() || user.getName() == null || user.getUserName() == null) {
 			return false;
 		}
 		

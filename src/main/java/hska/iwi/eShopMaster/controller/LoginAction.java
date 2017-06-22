@@ -12,104 +12,95 @@ import com.opensymphony.xwork2.ActionSupport;
 
 public class LoginAction extends ActionSupport {
 
-	/**
+    /**
      *
      */
-	private static final long serialVersionUID = -983183915002226000L;
-	private String username = null;
-	private String password = null;
-	private String firstname;
-	private String lastname;
-	private String role;
-	
+    private static final long serialVersionUID = -983183915002226000L;
+    private String username = null;
+    private String password = null;
+    private String firstname;
+    private String lastname;
+    private int role;
 
-	@Override
-	public String execute() throws Exception {
 
-		// Return string:
-		String result = "input";
+    @Override
+    public String execute() throws Exception {
 
-		//retrieve token
-		RestTemplateProvider.createAndGetOAuth2RestTemplate(getUsername(), getPassword());
+        // Return string:
+        String result = "input";
 
-		UserManager myCManager = new UserManagerImpl();
-		
-		// Get user from DB:
-		User user = myCManager.getUserByUsername(getUsername());
+        //retrieve token
+        RestTemplateProvider.createAndGetOAuth2RestTemplate(getUsername(), getPassword());
 
-		// Does user exist?
-		if (user != null) {
-			// Is the password correct?
-			if (user.getPassword().equals(getPassword())) {
-				// Get session to save user role and login:
-				Map<String, Object> session = ActionContext.getContext().getSession();
-				
-				// Save user object in session:
-				session.put("webshop_user", user);
-				session.put("message", "");
-				firstname= user.getFirstname();
-				lastname = user.getLastname();
-				role = user.getRole().getTyp();
-				result = "success";
-			}
-			else {
-				addActionError(getText("error.password.wrong"));
-			}
-		}
-		else {
-			addActionError(getText("error.username.wrong"));
-		}
+        UserManager myCManager = new UserManagerImpl();
 
-		return result;
-	}
-	
-	@Override
-	public void validate() {
-		if (getUsername().length() == 0) {
-			addActionError(getText("error.username.required"));
-		}
-		if (getPassword().length() == 0) {
-			addActionError(getText("error.password.required"));
-		}
-	}
+        // Get user from DB:
+        User user = myCManager.getUserByUsername(getUsername());
+        // Get session to save user role and login:
 
-	public String getUsername() {
-		return (this.username);
-	}
+        if (user == null) {
+            addActionError("error.password.wrong");
+        } else {
+            Map<String, Object> session = ActionContext.getContext().getSession();
 
-	public void setUsername(String username) {
-		this.username = username;
-	}
+            // Save user object in session:
+            session.put("webshop_user", user);
+            session.put("message", "");
+            firstname = user.getFirstName();
+            lastname = user.getName();
+            role = user.getRole();
+            result = "success";
+        }
+        return result;
+    }
 
-	public String getPassword() {
-		return (this.password);
-	}
+    @Override
+    public void validate() {
+        if (getUsername().length() == 0) {
+            addActionError(getText("error.username.required"));
+        }
+        if (getPassword().length() == 0) {
+            addActionError(getText("error.password.required"));
+        }
+    }
 
-	public void setPassword(String password) {
-		this.password = password;
-	}
+    public String getUsername() {
+        return (this.username);
+    }
 
-	public String getFirstname() {
-		return firstname;
-	}
+    public void setUsername(String username) {
+        this.username = username;
+    }
 
-	public void setFirstname(String firstname) {
-		this.firstname = firstname;
-	}
+    public String getPassword() {
+        return (this.password);
+    }
 
-	public String getLastname() {
-		return lastname;
-	}
+    public void setPassword(String password) {
+        this.password = password;
+    }
 
-	public void setLastname(String lastname) {
-		this.lastname = lastname;
-	}
+    public String getFirstname() {
+        return firstname;
+    }
 
-	public String getRole() {
-		return role;
-	}
+    public void setFirstname(String firstname) {
+        this.firstname = firstname;
+    }
 
-	public void setRole(String role) {
-		this.role = role;
-	}
+    public String getLastname() {
+        return lastname;
+    }
+
+    public void setLastname(String lastname) {
+        this.lastname = lastname;
+    }
+
+    public int getRole() {
+        return role;
+    }
+
+    public void setRole(int role) {
+        this.role = role;
+    }
 }

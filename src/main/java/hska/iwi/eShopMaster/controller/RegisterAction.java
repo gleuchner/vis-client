@@ -21,7 +21,7 @@ public class RegisterAction extends ActionSupport {
     private String firstname;
     private String lastname;
     
-    private Role role = null;
+    private int role = 0;
     
     @Override
     public String execute() throws Exception {
@@ -115,11 +115,11 @@ public class RegisterAction extends ActionSupport {
         this.password2 = password;
     }
     
-    public Role getRole() {
+    public int getRole() {
         return (this.role);
     }
     
-    public void setRole(Role role) {
+    public void setRole(int role) {
         this.role = role;
     }
 

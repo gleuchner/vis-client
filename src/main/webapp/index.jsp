@@ -12,7 +12,7 @@
 		<script type="text/javascript" src="bootstrap/js/bootstrap.min.js"></script>
 	</head>
 	<body>
-		<nav id="myNavbar"
+		<nav userId="myNavbar"
 			class="navbar navbar-default navbar-inverse navbar-fixed-top"
 			role="navigation">
 	
@@ -22,7 +22,7 @@
 					<a class="navbar-brand" href="http://www.iwi.hs-karlsruhe.de">Informatik</a>
 				</div>
 				<!-- Collect the nav links, forms, and other content for toggling -->
-				<div class="collapse navbar-collapse" id="navbarCollapse">
+				<div class="collapse navbar-collapse" userId="navbarCollapse">
 					<ul class="nav navbar-nav">
 					</ul>
 				</div>

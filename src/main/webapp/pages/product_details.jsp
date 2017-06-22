@@ -36,7 +36,7 @@
 		</nav>
 		<div class="container">
 			<div class="row">
-				<s:text name="login.status" /> 	${webshop_user.firstname} ${webshop_user.lastname}
+				<s:text name="login.status" /> 	${webshop_user.firstName} ${webshop_user.lastName}
 			</div>
 	
 			<div class="row">
@@ -63,7 +63,7 @@
 				</tr>
 			</table>
 	
-			<a href="./SearchAction.action?id=<s:property value='id'/>&searchValue=<s:property value='searchValue'/>&searchMinPrice=<s:property value='searchMinPrice'/>&searchMaxPrice=<s:property value='searchMaxPrice'/>">[<s:text name="link.back" />]</a>
+			<a href="./SearchAction.action?userId=<s:property value='userId'/>&searchValue=<s:property value='searchValue'/>&searchMinPrice=<s:property value='searchMinPrice'/>&searchMaxPrice=<s:property value='searchMaxPrice'/>">[<s:text name="link.back" />]</a>
 		</div>
 	</body>
 </html>

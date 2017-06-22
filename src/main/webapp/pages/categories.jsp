@@ -36,7 +36,7 @@
 		</nav>
 		<div class="container">
 			<div class="row">
-				<s:text name="login.status" /> 	${webshop_user.firstname} ${webshop_user.lastname}
+				<s:text name="login.status" /> 	${webshop_user.firstName} ${webshop_user.lastName}
 			</div>
 	
 			<div class="row">
@@ -60,7 +60,7 @@
 		<font color="red"> <s:actionerror />
 		</font>
 	
-		<div id="categories">
+		<div userId="categories">
 			<table class="table table-striped">
 				<tr class="header">
 					<td><s:text name="categories.nr" /></td>
@@ -70,15 +70,15 @@
 				<s:iterator value="categories" status="rowstatus">
 					<tr>
 					<s:if test="#rowstatus.odd == true">
-						<td class="odd"><s:property value="id" />
+						<td class="odd"><s:property value="userId" />
 						<td class="odd"><s:property value="name" /></td>
-						<td class="odd"><a href="<s:url action="DeleteCategoryAction"><s:param name="catId" value="id" /></s:url>"><img src="img/delBtn.png" alt="<s:text name="product.delete" />"/></a></td>
+						<td class="odd"><a href="<s:url action="DeleteCategoryAction"><s:param name="catId" value="userId" /></s:url>"><img src="img/delBtn.png" alt="<s:text name="product.delete" />"/></a></td>
 					</s:if>
 					<s:else>
-						<td><s:property value="id" /></td>
+						<td><s:property value="userId" /></td>
 						<td><s:property value="name" /></td>
 						<td><s:form action ="DeleteCategoryAction" >
-								<s:hidden name="catId" value="%{id}" />
+								<s:hidden name="catId" value="%{userId}" />
 								<s:submit value="loeschen"/>
 							</s:form>
 							</td>

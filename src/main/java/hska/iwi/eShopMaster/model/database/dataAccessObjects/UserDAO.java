@@ -1,7 +1,5 @@
 package hska.iwi.eShopMaster.model.database.dataAccessObjects;
 
-import java.util.List;
-
 
 import hska.iwi.eShopMaster.configuration.RestTemplateProvider;
 import hska.iwi.eShopMaster.model.database.dataobjects.User;
@@ -30,19 +28,13 @@ public class UserDAO  {
             OAuth2RestTemplate restTemplate = RestTemplateProvider.getRestTemplate();
             User[] users = restTemplate.getForObject(USER_BASE_URL, User[].class);
             for (User user :users) {
-                if (user.getUsername().equals(name)) {
+                if (user.getUserName().equals(name)) {
                     response = new ResponseEntity<User>(user, HttpStatus.OK);
+                    break;
                 }
             }
         } catch (OAuth2AccessDeniedException e) {
-            if (e.getCause().getMessage().equals("999")) {
-                // return a null user => username not found
-                return null;
-            } else if (e.getCause().getMessage().equals("1001")) {
-                // return a dummy user => password wrong
-                User dummy = new User();
-                return dummy;
-            }
+            return null;
         }
         return response.getBody();
 	}

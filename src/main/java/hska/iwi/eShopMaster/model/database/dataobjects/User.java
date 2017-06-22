@@ -12,60 +12,60 @@ public class User implements java.io.Serializable {
 	 */
 	private static final long serialVersionUID = 1L;
 
-	private int id;
+	private int userId;
 
-	private String username;
+	private String userName;
 
-	private String firstname;
+	private String firstName;
 
-	private String lastname;
+	private String name;
 
 	private String password;
 
-	private Role role;
+	private int role;
 
 	public User() {
 	}
 
 	public User(String username, String firstname, String lastname,
-			String password, Role role) {
-		this.username = username;
-		this.firstname = firstname;
-		this.lastname = lastname;
+			String password, int role) {
+		this.userName = username;
+		this.firstName = firstname;
+		this.name = lastname;
 		this.password = password;
 		this.role = role;
 	}
 
-	public int getId() {
-		return this.id;
+	public int getUserId() {
+		return this.userId;
 	}
 
-	public void setId(int id) {
-		this.id = id;
+	public void setUserId(int userId) {
+		this.userId = userId;
 	}
 
-	public String getUsername() {
-		return this.username;
+	public String getUserName() {
+		return this.userName;
 	}
 
-	public void setUsername(String username) {
-		this.username = username;
+	public void setUserName(String userName) {
+		this.userName = userName;
 	}
 
-	public String getFirstname() {
-		return this.firstname;
+	public String getFirstName() {
+		return this.firstName;
 	}
 
-	public void setFirstname(String firstname) {
-		this.firstname = firstname;
+	public void setFirstName(String firstName) {
+		this.firstName = firstName;
 	}
 
-	public String getLastname() {
-		return this.lastname;
+	public String getName() {
+		return this.name;
 	}
 
-	public void setLastname(String lastname) {
-		this.lastname = lastname;
+	public void setName(String name) {
+		this.name = name;
 	}
 
 	public String getPassword() {
@@ -76,11 +76,11 @@ public class User implements java.io.Serializable {
 		this.password = password;
 	}
 
-	public Role getRole() {
+	public int getRole() {
 		return this.role;
 	}
 
-	public void setRole(Role role) {
+	public void setRole(int role) {
 		this.role = role;
 	}
 
