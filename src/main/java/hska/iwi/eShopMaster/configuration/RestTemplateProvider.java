@@ -35,16 +35,13 @@ public class RestTemplateProvider {
      * Creates an OAuth2 rest template with grand type 'password' for the given
      * credentials.
      *
-     * @param username
-     *            the username credential
-     * @param password
-     *            the password credential
+     * @param username the username credential
+     * @param password the password credential
      * @return the configured OAuth2 rest template
      */
     public static OAuth2RestTemplate createAndGetOAuth2RestTemplate(String username, String password) {
-        AccessTokenRequest atr = new DefaultAccessTokenRequest();
         CONFIGURED_OAUTH2_REST_TEMPLATE = new OAuth2RestTemplate(createResource(username, password),
-                new DefaultOAuth2ClientContext(atr));
+                new DefaultOAuth2ClientContext());
         return CONFIGURED_OAUTH2_REST_TEMPLATE;
     }
 
@@ -69,9 +66,19 @@ public class RestTemplateProvider {
     }
 
     public static OAuth2RestTemplate createAndGetOAuth2RestTemplateForRegister() {
-        AccessTokenRequest atr = new DefaultAccessTokenRequest();
-        CONFIGURED_OAUTH2_REST_TEMPLATE_FOR_REGISTER = new OAuth2RestTemplate(createResourceForRegister(),
-                new DefaultOAuth2ClientContext(atr));
+        ClientCredentialsResourceDetails resourceDetails = new ClientCredentialsResourceDetails();
+        resourceDetails.setId("1");
+        resourceDetails.setClientId(CLIENT_ID);
+        resourceDetails.setClientSecret(CLIENT_SECRET);
+        resourceDetails.setAccessTokenUri(TOKEN_URI);
+        List<String> scopes = new ArrayList<>();
+        scopes.add("read");
+        scopes.add("write");
+        scopes.add("trust");
+        resourceDetails.setScope(scopes);
+
+        CONFIGURED_OAUTH2_REST_TEMPLATE_FOR_REGISTER = new OAuth2RestTemplate(resourceDetails, new DefaultOAuth2ClientContext());
+
         return CONFIGURED_OAUTH2_REST_TEMPLATE_FOR_REGISTER;
     }
 

@@ -46,7 +46,7 @@ public class LoginAction extends ActionSupport {
             // Save user object in session:
             session.put("webshop_user", user);
             session.put("message", "");
-            firstname = user.getFirstName();
+            firstname = user.getFirstname();
             lastname = user.getName();
             role = user.getRole();
             result = "success";

@@ -14,9 +14,9 @@ public class User implements java.io.Serializable {
 
 	private int userId;
 
-	private String userName;
+	private String username;
 
-	private String firstName;
+	private String firstname;
 
 	private String name;
 
@@ -29,8 +29,8 @@ public class User implements java.io.Serializable {
 
 	public User(String username, String firstname, String lastname,
 			String password, int role) {
-		this.userName = username;
-		this.firstName = firstname;
+		this.username = username;
+		this.firstname = firstname;
 		this.name = lastname;
 		this.password = password;
 		this.role = role;
@@ -44,20 +44,20 @@ public class User implements java.io.Serializable {
 		this.userId = userId;
 	}
 
-	public String getUserName() {
-		return this.userName;
+	public String getUsername() {
+		return this.username;
 	}
 
-	public void setUserName(String userName) {
-		this.userName = userName;
+	public void setUsername(String username) {
+		this.username = username;
 	}
 
-	public String getFirstName() {
-		return this.firstName;
+	public String getFirstname() {
+		return this.firstname;
 	}
 
-	public void setFirstName(String firstName) {
-		this.firstName = firstName;
+	public void setFirstname(String firstname) {
+		this.firstname = firstname;
 	}
 
 	public String getName() {

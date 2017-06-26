@@ -2,15 +2,10 @@ package hska.iwi.eShopMaster.model.database.dataAccessObjects;
 
 
 import hska.iwi.eShopMaster.configuration.RestTemplateProvider;
-import hska.iwi.eShopMaster.model.database.dataobjects.Category;
 import hska.iwi.eShopMaster.model.database.dataobjects.User;
 import org.springframework.http.*;
 import org.springframework.security.oauth2.client.OAuth2RestTemplate;
 import org.springframework.security.oauth2.client.resource.OAuth2AccessDeniedException;
-import org.springframework.web.util.UriComponentsBuilder;
-
-import javax.ws.rs.client.Entity;
-import javax.ws.rs.core.Response;
 
 
 public class UserDAO  {
@@ -36,11 +31,11 @@ public class UserDAO  {
             if(isForRegister){
                 restTemplate = RestTemplateProvider.getRestTemplateForRegister();
             }else{
-                restTemplate = RestTemplateProvider.createAndGetOAuth2RestTemplateForRegister();
+                restTemplate = RestTemplateProvider.getRestTemplate();
             }
             User[] users = restTemplate.getForObject(USER_BASE_URL, User[].class);
             for (User user :users) {
-                if (user.getUserName().equals(name)) {
+                if (user.getUsername().equals(name)) {
                     response = new ResponseEntity<User>(user, HttpStatus.OK);
                     break;
                 }

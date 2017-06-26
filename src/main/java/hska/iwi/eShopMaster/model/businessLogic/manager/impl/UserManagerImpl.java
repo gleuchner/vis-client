@@ -57,7 +57,7 @@ public class UserManagerImpl implements UserManager {
 	
 
 	public boolean validate(User user) {
-		if (user.getFirstName().isEmpty() || user.getPassword().isEmpty() || user.getName() == null || user.getUserName() == null) {
+		if (user.getFirstname().isEmpty() || user.getPassword().isEmpty() || user.getName() == null || user.getUsername() == null) {
 			return false;
 		}
 		
