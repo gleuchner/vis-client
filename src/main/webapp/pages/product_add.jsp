@@ -21,7 +21,7 @@
 				<div>
 					<ul class="nav navbar-nav">
 						<li><a href="<s:url action="listAllProducts" />">Alle Produkte</a>
-						<s:if test="#session.webshop_user.role.level==0">   <!-- if admin -->
+						<s:if test="#session.webshop_user.role==2">   <!-- if admin -->
 							<li><a href="./InitCategorySiteAction.action?pageToGoTo=p"><s:text name="product.add" /></a></li>
 							<li><a href="./InitCategorySiteAction.action?pageToGoTo=c"><s:text name="categories.edit" /></a></li>
 						</s:if>
@@ -36,7 +36,7 @@
 		</nav>
 		<div class="container">
 			<div class="row">
-				<s:text name="login.status" /> 	${webshop_user.firstName} ${webshop_user.lastName}
+				<s:text name="login.status" /> 	${webshop_user.firstname} ${webshop_user.name}
 			</div>
 	
 			<div class="row">
