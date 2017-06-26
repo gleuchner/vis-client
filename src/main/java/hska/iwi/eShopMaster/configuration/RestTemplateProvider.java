@@ -12,6 +12,7 @@ import org.springframework.security.oauth2.client.OAuth2RestTemplate;
 import org.springframework.security.oauth2.client.resource.OAuth2ProtectedResourceDetails;
 import org.springframework.security.oauth2.client.token.AccessTokenRequest;
 import org.springframework.security.oauth2.client.token.DefaultAccessTokenRequest;
+import org.springframework.security.oauth2.client.token.grant.client.ClientCredentialsResourceDetails;
 import org.springframework.security.oauth2.client.token.grant.password.ResourceOwnerPasswordResourceDetails;
 
 public class RestTemplateProvider {
@@ -20,9 +21,14 @@ public class RestTemplateProvider {
     public static final String CLIENT_ID = "my-client-with-secret";
     public static final String CLIENT_SECRET = "secret";
     private static OAuth2RestTemplate CONFIGURED_OAUTH2_REST_TEMPLATE;
+    private static OAuth2RestTemplate CONFIGURED_OAUTH2_REST_TEMPLATE_FOR_REGISTER;
 
     public static OAuth2RestTemplate getRestTemplate() {
         return CONFIGURED_OAUTH2_REST_TEMPLATE;
+    }
+
+    public static OAuth2RestTemplate getRestTemplateForRegister() {
+        return CONFIGURED_OAUTH2_REST_TEMPLATE_FOR_REGISTER;
     }
 
     /**
@@ -61,4 +67,41 @@ public class RestTemplateProvider {
 
         return resource;
     }
+
+    public static OAuth2RestTemplate createAndGetOAuth2RestTemplateForRegister() {
+        AccessTokenRequest atr = new DefaultAccessTokenRequest();
+        CONFIGURED_OAUTH2_REST_TEMPLATE_FOR_REGISTER = new OAuth2RestTemplate(createResourceForRegister(),
+                new DefaultOAuth2ClientContext(atr));
+        return CONFIGURED_OAUTH2_REST_TEMPLATE_FOR_REGISTER;
+    }
+
+
+    private static OAuth2ProtectedResourceDetails createResourceForRegister() {
+
+//        ClientCredentialsResourceDetails resource = new ClientCredentialsResourceDetails();
+//
+//        List<String> scopes = new ArrayList<String>(2);
+//        scopes.add("read");
+//        scopes.add("write");
+//        scopes.add("trust");
+//        resource.setAccessTokenUri(TOKEN_URI);
+//        resource.setClientId(CLIENT_ID);
+//        resource.setClientSecret(CLIENT_SECRET);
+////        resource.setGrantType("user_credentials");
+//        resource.setScope(scopes);
+
+        ClientCredentialsResourceDetails resourceDetails = new ClientCredentialsResourceDetails();
+        resourceDetails.setId("1");
+        resourceDetails.setClientId(CLIENT_ID);
+        resourceDetails.setClientSecret(CLIENT_SECRET);
+        resourceDetails.setAccessTokenUri(TOKEN_URI);
+        List<String> scopes = new ArrayList<>();
+        scopes.add("read");
+        scopes.add("write");
+        scopes.add("trust");
+        resourceDetails.setScope(scopes);
+
+        return resourceDetails;
+    }
+
 }

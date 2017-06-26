@@ -1,5 +1,6 @@
 package hska.iwi.eShopMaster.controller;
 
+import hska.iwi.eShopMaster.configuration.RestTemplateProvider;
 import hska.iwi.eShopMaster.model.businessLogic.manager.UserManager;
 import hska.iwi.eShopMaster.model.businessLogic.manager.impl.UserManagerImpl;
 import hska.iwi.eShopMaster.model.database.dataobjects.Role;
@@ -29,7 +30,10 @@ public class RegisterAction extends ActionSupport {
         // Return string:
         String result = "input";
 
-        UserManager userManager = new UserManagerImpl();
+        //retrieve token
+        RestTemplateProvider.createAndGetOAuth2RestTemplateForRegister();
+
+        UserManager userManager = new UserManagerImpl(true);
 
    		this.role = userManager.getRoleByLevel(1); // 1 -> regular User, 2-> Admin
 

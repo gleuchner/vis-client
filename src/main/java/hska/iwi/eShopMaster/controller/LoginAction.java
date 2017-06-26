@@ -32,7 +32,7 @@ public class LoginAction extends ActionSupport {
         //retrieve token
         RestTemplateProvider.createAndGetOAuth2RestTemplate(getUsername(), getPassword());
 
-        UserManager myCManager = new UserManagerImpl();
+        UserManager myCManager = new UserManagerImpl(false);
 
         // Get user from DB:
         User user = myCManager.getUserByUsername(getUsername());
@@ -80,19 +80,19 @@ public class LoginAction extends ActionSupport {
         this.password = password;
     }
 
-    public String getFirstname() {
+    public String getFirstName() {
         return firstname;
     }
 
-    public void setFirstname(String firstname) {
+    public void setFirstName(String firstname) {
         this.firstname = firstname;
     }
 
-    public String getLastname() {
+    public String getLastName() {
         return lastname;
     }
 
-    public void setLastname(String lastname) {
+    public void setLastName(String lastname) {
         this.lastname = lastname;
     }
 

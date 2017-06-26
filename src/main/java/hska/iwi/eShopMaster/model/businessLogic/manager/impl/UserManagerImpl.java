@@ -12,8 +12,8 @@ import hska.iwi.eShopMaster.model.database.dataobjects.User;
 public class UserManagerImpl implements UserManager {
 	UserDAO helper;
 	
-	public UserManagerImpl() {
-		helper = new UserDAO();
+	public UserManagerImpl(boolean isForRegister) {
+		helper = new UserDAO(isForRegister);
 	}
 
 	
