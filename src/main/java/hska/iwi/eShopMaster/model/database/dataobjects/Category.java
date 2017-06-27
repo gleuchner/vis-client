@@ -16,7 +16,7 @@ public class Category implements java.io.Serializable {
 	private static final long serialVersionUID = 1L;
 	private int id;
 	private String name;
-	private Set<Product> products = new HashSet<Product>(0);
+//	private Set<Product> products = new HashSet<Product>(0);
 
 	public Category() {
 	}
@@ -27,7 +27,7 @@ public class Category implements java.io.Serializable {
 
 	public Category(String name, Set<Product> products) {
 		this.name = name;
-		this.products = products;
+//		this.products = products;
 	}
 
 
@@ -47,12 +47,12 @@ public class Category implements java.io.Serializable {
 		this.name = name;
 	}
 
-	public Set<Product> getProducts() {
-		return this.products;
-	}
-
-	public void setProducts(Set<Product> products) {
-		this.products = products;
-	}
+//	public Set<Product> getProducts() {
+//		return this.products;
+//	}
+//
+//	public void setProducts(Set<Product> products) {
+//		this.products = products;
+//	}
 
 }

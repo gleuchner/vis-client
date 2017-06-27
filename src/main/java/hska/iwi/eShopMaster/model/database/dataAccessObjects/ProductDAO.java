@@ -1,6 +1,7 @@
 package hska.iwi.eShopMaster.model.database.dataAccessObjects;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 import hska.iwi.eShopMaster.configuration.RestTemplateProvider;
@@ -48,8 +49,8 @@ public class ProductDAO {
 	}
 
 	public List<Product> getObjectList() {
-		ArrayList<Product> products = new ArrayList<>();
-		products = RestTemplateProvider.getRestTemplate().getForObject(PRODUCT_BASE_URL, products.getClass());
-		return products;
+
+		Product[] products = RestTemplateProvider.getRestTemplate().getForObject(PRODUCT_BASE_URL, Product[].class);
+		return Arrays.asList(products);
 	}
 }

@@ -30,10 +30,10 @@ public class AddCategoryAction extends ActionSupport {
 
 		Map<String, Object> session = ActionContext.getContext().getSession();
 		user = (User) session.get("webshop_user");
-		if(user != null && (user.getRole() == 1)) {
+		if(user != null && (user.getRole() == 2)) {
 			CategoryManager categoryManager = new CategoryManagerImpl();
 			// Add category
-			categoryManager.addCategory(newCatName);
+			categoryManager.addCategory(newCatName, user.getUserId());
 			
 			// Go and get new Category list
 			this.setCategories(categoryManager.getCategories());

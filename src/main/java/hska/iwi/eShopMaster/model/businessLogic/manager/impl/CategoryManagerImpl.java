@@ -23,14 +23,14 @@ public class CategoryManagerImpl implements CategoryManager{
 	}
 
 
-	public void addCategory(String name) {
+	public void addCategory(String name, int userId) {
 		Category cat = new Category(name);
-		helper.saveObject(cat);
+		helper.saveObject(cat, userId);
 
 	}
 
-	public void delCategoryById(int id) {
+	public void delCategoryById(int id, int userId) {
 		
-		helper.deleteById(id);
+		helper.deleteById(id, userId);
 	}
 }
