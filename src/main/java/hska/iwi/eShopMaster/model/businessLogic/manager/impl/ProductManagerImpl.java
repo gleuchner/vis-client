@@ -28,7 +28,7 @@ public class ProductManagerImpl implements ProductManager {
 		return helper.getObjectById(id);
 	}
 
-	public int addProduct(String name, double price, int categoryId, String details) {
+	public int addProduct(String name, double price, int categoryId, String details, int userId) {
 		int productId = -1;
 		
 		CategoryManager categoryManager = new CategoryManagerImpl();
@@ -42,7 +42,7 @@ public class ProductManagerImpl implements ProductManager {
 				product = new Product(name, price, category, details);
 			}
 			
-			helper.saveObject(product);
+			helper.saveObject(product, userId);
 			productId = product.getId();
 		}
 			 

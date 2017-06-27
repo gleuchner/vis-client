@@ -32,7 +32,7 @@ public class AddProductAction extends ActionSupport {
 
 			ProductManager productManager = new ProductManagerImpl();
 			int productId = productManager.addProduct(name, Double.parseDouble(price), categoryId,
-					details);
+					details, user.getUserId());
 
 			if (productId > 0) {
 				result = "success";

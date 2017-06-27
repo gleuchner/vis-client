@@ -5,10 +5,14 @@ import java.util.Arrays;
 import java.util.List;
 
 import hska.iwi.eShopMaster.configuration.RestTemplateProvider;
+import hska.iwi.eShopMaster.model.database.dataobjects.Category;
 import org.apache.commons.lang3.ObjectUtils;
 
 import hska.iwi.eShopMaster.model.database.dataobjects.Product;
+import org.springframework.http.HttpEntity;
+import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpMethod;
+import org.springframework.http.MediaType;
 import org.springframework.web.util.UriComponentsBuilder;
 
 
@@ -36,9 +40,13 @@ public class ProductDAO {
 		RestTemplateProvider.getRestTemplate().exchange(builder.build().encode().toUri(), HttpMethod.DELETE, null, Void.class);
 	}
 
-	public void saveObject(Product product) {
-		UriComponentsBuilder builder = UriComponentsBuilder.fromHttpUrl(PRODUCT_BASE_URL);
-		RestTemplateProvider.getRestTemplate().postForObject(builder.build().encode().toUri(), product, Product.class);
+	public void saveObject(Product product, int userId) {
+		HttpHeaders headers = new HttpHeaders();
+		headers.setContentType(MediaType.APPLICATION_JSON);
+		headers.add("userId", Integer.toString(userId));
+
+		HttpEntity<Product> entity = new HttpEntity<Product>(product,headers);
+		RestTemplateProvider.getRestTemplate().postForObject(PRODUCT_BASE_URL, entity, Category.class);
 	}
 
 

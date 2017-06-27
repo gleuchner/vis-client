@@ -23,8 +23,7 @@ public class CategoryDAO {
     }
 
     public Category getObjectById(int id) {
-        UriComponentsBuilder builder = UriComponentsBuilder.fromHttpUrl(CATEGORY_BASE_URL).pathSegment(String.valueOf(id));
-        return RestTemplateProvider.getRestTemplate().getForObject(builder.build().encode().toUri(), Category.class);
+        return RestTemplateProvider.getRestTemplate().getForObject(CATEGORY_BASE_URL + "/" + String.valueOf(id), Category.class);
     }
 
     public void saveObject(Category cat, int userId) {
