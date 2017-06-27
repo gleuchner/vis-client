@@ -28,7 +28,7 @@ public class AddProductAction extends ActionSupport {
 		Map<String, Object> session = ActionContext.getContext().getSession();
 		User user = (User) session.get("webshop_user");
 
-		if(user != null && (user.getRole() == 1)) {
+		if(user != null && (user.getRole() == 2)) {
 
 			ProductManager productManager = new ProductManagerImpl();
 			int productId = productManager.addProduct(name, Double.parseDouble(price), categoryId,

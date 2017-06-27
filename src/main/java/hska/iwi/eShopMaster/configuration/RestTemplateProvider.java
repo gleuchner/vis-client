@@ -7,6 +7,7 @@ package hska.iwi.eShopMaster.configuration;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.springframework.http.client.SimpleClientHttpRequestFactory;
 import org.springframework.security.oauth2.client.DefaultOAuth2ClientContext;
 import org.springframework.security.oauth2.client.OAuth2RestTemplate;
 import org.springframework.security.oauth2.client.resource.OAuth2ProtectedResourceDetails;
@@ -76,9 +77,11 @@ public class RestTemplateProvider {
         scopes.add("write");
         scopes.add("trust");
         resourceDetails.setScope(scopes);
-
         CONFIGURED_OAUTH2_REST_TEMPLATE_FOR_REGISTER = new OAuth2RestTemplate(resourceDetails, new DefaultOAuth2ClientContext());
-
+        SimpleClientHttpRequestFactory rf = (SimpleClientHttpRequestFactory) CONFIGURED_OAUTH2_REST_TEMPLATE_FOR_REGISTER
+                .getRequestFactory();
+        rf.setReadTimeout(10000);
+        rf.setConnectTimeout(1000);
         return CONFIGURED_OAUTH2_REST_TEMPLATE_FOR_REGISTER;
     }
 
