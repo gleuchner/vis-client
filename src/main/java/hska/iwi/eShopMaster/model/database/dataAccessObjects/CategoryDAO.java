@@ -14,7 +14,7 @@ import java.util.Arrays;
 import java.util.List;
 
 public class CategoryDAO {
-    private static final String CATEGORY_BASE_URL = "http://localhost:8762/category-api/categories";
+    private static final String CATEGORY_BASE_URL = "http://zuul:8762/category-api/categories";
 
     public List<Category> getObjectList() {
         Category[] categories = RestTemplateProvider.getRestTemplate().getForObject(CATEGORY_BASE_URL, Category[].class);

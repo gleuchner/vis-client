@@ -10,7 +10,7 @@ import org.springframework.security.oauth2.client.resource.OAuth2AccessDeniedExc
 
 public class UserDAO  {
 
-    private static final String USER_BASE_URL = "http://localhost:8762/user-api/users";
+    private static final String USER_BASE_URL = "http://zuul:8762/user-api/users";
 
     private boolean isForRegister;
 
