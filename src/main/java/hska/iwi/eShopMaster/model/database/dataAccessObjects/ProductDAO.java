@@ -20,7 +20,7 @@ public class ProductDAO {
 	private static final String PRODUCT_BASE_URL = "http://localhost:8762/product-api/products";
 
 	public List<Product> getProductListByCriteria(String searchDescription,
-												  Double searchMinPrice, Double searchMaxPrice) {
+												  Integer searchMinPrice, Integer searchMaxPrice) {
 
 		ArrayList<Product> products = new ArrayList<>();
 

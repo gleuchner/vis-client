@@ -20,7 +20,7 @@ public class ProductManagerImpl implements ProductManager {
 	}
 	
 	public List<Product> getProductsForSearchValues(String searchDescription,
-			Double searchMinPrice, Double searchMaxPrice) {	
+			Integer searchMinPrice, Integer searchMaxPrice) {
 		return new ProductDAO().getProductListByCriteria(searchDescription, searchMinPrice, searchMaxPrice);
 	}
 

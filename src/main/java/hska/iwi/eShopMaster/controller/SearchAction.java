@@ -27,8 +27,8 @@ public class SearchAction extends ActionSupport{
 	private String searchMinPrice;
 	private String searchMaxPrice;
 	
-	private Double sMinPrice = null;
-	private Double sMaxPrice = null;
+	private Integer sMinPrice = null;
+	private Integer sMaxPrice = null;
 	
 	private User user;
 	private List<Product> products;
@@ -49,10 +49,10 @@ public class SearchAction extends ActionSupport{
 			ProductManager productManager = new ProductManagerImpl();
 //			this.products = productManager.getProductsForSearchValues(this.searchDescription, this.searchMinPrice, this.searchMaxPrice);
 			if (!searchMinPrice.isEmpty()){
-				sMinPrice =  Double.parseDouble(this.searchMinPrice);
+				sMinPrice =  Integer.parseInt(this.searchMinPrice);
 			}
 			if (!searchMaxPrice.isEmpty()){
-				sMaxPrice =  Double.parseDouble(this.searchMaxPrice);
+				sMaxPrice =  Integer.parseInt(this.searchMaxPrice);
 			}
 			this.products = productManager.getProductsForSearchValues(this.searchDescription, sMinPrice, sMaxPrice);
 			
