@@ -17,7 +17,7 @@ import org.springframework.security.oauth2.client.token.grant.client.ClientCrede
 import org.springframework.security.oauth2.client.token.grant.password.ResourceOwnerPasswordResourceDetails;
 
 public class RestTemplateProvider {
-    private static final String AUTH_BASE_URL = "http://localhost:8763";
+    private static final String AUTH_BASE_URL = "http://authserver:8763";
     public static final String TOKEN_URI = AUTH_BASE_URL + "/oauth/token";
     public static final String CLIENT_ID = "my-client-with-secret";
     public static final String CLIENT_SECRET = "secret";

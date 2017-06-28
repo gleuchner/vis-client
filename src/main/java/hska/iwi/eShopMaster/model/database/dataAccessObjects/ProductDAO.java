@@ -18,7 +18,7 @@ import org.springframework.web.util.UriComponentsBuilder;
 
 
 public class ProductDAO {
-    private static final String PRODUCT_BASE_URL = "http://localhost:8762/product-api/products";
+    private static final String PRODUCT_BASE_URL = "http://zuul:8762/product-api/products";
 
     public List<Product> getProductListByCriteria(String searchDescription,
                                                   Integer searchMinPrice, Integer searchMaxPrice) {
