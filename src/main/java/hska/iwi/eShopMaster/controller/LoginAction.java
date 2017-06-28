@@ -29,15 +29,16 @@ public class LoginAction extends ActionSupport {
         // Return string:
         String result = "input";
 
-        //retrieve token
-        RestTemplateProvider.createAndGetOAuth2RestTemplate(getUsername(), getPassword());
+        //retrieve token for credentials check
+        RestTemplateProvider.createAndGetOAuth2RestTemplateForRegister();
 
-        UserManager myCManager = new UserManagerImpl(false);
+        UserManager myCManager = new UserManagerImpl(true);
 
         // Get user from DB:
         User user = myCManager.getUserByUsername(getUsername());
         // Get session to save user role and login:
 
+        RestTemplateProvider.createAndGetOAuth2RestTemplate(user.getUsername(), user.getUsername(), user.getRole());
         if (user == null) {
             addActionError("error.password.wrong");
         } else {

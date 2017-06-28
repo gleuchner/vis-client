@@ -40,20 +40,24 @@ public class RestTemplateProvider {
      * @param password the password credential
      * @return the configured OAuth2 rest template
      */
-    public static OAuth2RestTemplate createAndGetOAuth2RestTemplate(String username, String password) {
-        CONFIGURED_OAUTH2_REST_TEMPLATE = new OAuth2RestTemplate(createResource(username, password),
+    public static OAuth2RestTemplate createAndGetOAuth2RestTemplate(String username, String password, int role) {
+        CONFIGURED_OAUTH2_REST_TEMPLATE = new OAuth2RestTemplate(createResource(username, password, role),
                 new DefaultOAuth2ClientContext());
         return CONFIGURED_OAUTH2_REST_TEMPLATE;
     }
 
-    private static OAuth2ProtectedResourceDetails createResource(String username, String password) {
+    private static OAuth2ProtectedResourceDetails createResource(String username, String password, int role) {
 
         ResourceOwnerPasswordResourceDetails resource = new ResourceOwnerPasswordResourceDetails();
 
         List<String> scopes = new ArrayList<String>(2);
         scopes.add("read");
-        scopes.add("write");
         scopes.add("trust");
+
+        if (role == 2) {
+            scopes.add("write");
+        }
+
         resource.setAccessTokenUri(TOKEN_URI);
         resource.setClientId(CLIENT_ID);
         resource.setClientSecret(CLIENT_SECRET);
