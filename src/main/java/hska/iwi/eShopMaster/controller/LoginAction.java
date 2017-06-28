@@ -37,21 +37,21 @@ public class LoginAction extends ActionSupport {
         // Get user from DB:
         User user = myCManager.getUserByUsername(getUsername());
         // Get session to save user role and login:
-
-        RestTemplateProvider.createAndGetOAuth2RestTemplate(user.getUsername(), user.getUsername(), user.getRole());
-        if (user == null) {
+        if ((user == null) || !(user.getPassword().equals(this.getPassword()))) {
             addActionError("error.password.wrong");
-        } else {
-            Map<String, Object> session = ActionContext.getContext().getSession();
-
-            // Save user object in session:
-            session.put("webshop_user", user);
-            session.put("message", "");
-            firstname = user.getFirstname();
-            lastname = user.getName();
-            role = user.getRole();
-            result = "success";
+            return result;
         }
+        RestTemplateProvider.createAndGetOAuth2RestTemplate(user.getUsername(), user.getUsername(), user.getRole());
+
+        Map<String, Object> session = ActionContext.getContext().getSession();
+
+        // Save user object in session:
+        session.put("webshop_user", user);
+        session.put("message", "");
+        firstname = user.getFirstname();
+        lastname = user.getName();
+        role = user.getRole();
+        result = "success";
         return result;
     }
 
