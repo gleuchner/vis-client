@@ -10,6 +10,8 @@ import java.util.Map;
 
 import com.opensymphony.xwork2.ActionContext;
 import com.opensymphony.xwork2.ActionSupport;
+import org.springframework.http.HttpStatus;
+import org.springframework.web.client.HttpClientErrorException;
 
 public class DeleteCategoryAction extends ActionSupport {
 
@@ -32,8 +34,15 @@ public class DeleteCategoryAction extends ActionSupport {
 
 			// Helper inserts new Category in DB:
 			CategoryManager categoryManager = new CategoryManagerImpl();
-		
-			categoryManager.delCategoryById(catId, user.getUserId());
+
+			try {
+				categoryManager.delCategoryById(catId, user.getUserId());
+			} catch (HttpClientErrorException e) {
+				if(e.getStatusCode() == HttpStatus.CONFLICT) {
+					addActionError("Category still contains Products, please delete them first");
+					return res;
+				}
+			}
 
 			categories = categoryManager.getCategories();
 				
