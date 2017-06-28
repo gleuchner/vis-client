@@ -12,38 +12,38 @@ public class Product implements java.io.Serializable {
 	 */
 	private static final long serialVersionUID = 1L;
 
-	private int id;
+	private int productId;
 
 	private String name;
 
 	private double price;
 
-	private Category category;
+	private int categoryId;
 
 	private String details;
 
 	public Product() {
 	}
 
-	public Product(String name, double price, Category category) {
+	public Product(String name, double price, int category) {
 		this.name = name;
 		this.price = price;
-		this.category = category;
+		this.categoryId = category;
 	}
 
-	public Product(String name, double price, Category category, String details) {
+	public Product(String name, double price, int category, String details) {
 		this.name = name;
 		this.price = price;
-		this.category = category;
+		this.categoryId = category;
 		this.details = details;
 	}
 
-	public int getId() {
-		return this.id;
+	public int getProductId() {
+		return this.productId;
 	}
 
-	public void setId(int id) {
-		this.id = id;
+	public void setProductId(int id) {
+		this.productId = id;
 	}
 
 	public String getName() {
@@ -62,12 +62,12 @@ public class Product implements java.io.Serializable {
 		this.price = price;
 	}
 
-	public Category getCategory() {
-		return this.category;
+	public int getCategoryId() {
+		return this.categoryId;
 	}
 
-	public void setCategory(Category category) {
-		this.category = category;
+	public void setCategoryId(int category) {
+		this.categoryId = category;
 	}
 
 	public String getDetails() {

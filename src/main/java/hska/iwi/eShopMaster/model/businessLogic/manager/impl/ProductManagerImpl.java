@@ -37,13 +37,13 @@ public class ProductManagerImpl implements ProductManager {
 		if(category != null){
 			Product product;
 			if(details == null){
-				product = new Product(name, price, category);	
+				product = new Product(name, price, category.getId());
 			} else{
-				product = new Product(name, price, category, details);
+				product = new Product(name, price, category.getId(), details);
 			}
-			
-			helper.saveObject(product, userId);
-			productId = product.getId();
+
+			product = helper.saveObject(product, userId);
+			productId = product.getProductId();
 		}
 			 
 		return productId;

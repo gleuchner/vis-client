@@ -40,20 +40,18 @@ public class ProductDAO {
 		RestTemplateProvider.getRestTemplate().exchange(builder.build().encode().toUri(), HttpMethod.DELETE, null, Void.class);
 	}
 
-	public void saveObject(Product product, int userId) {
+	public Product saveObject(Product product, int userId) {
 		HttpHeaders headers = new HttpHeaders();
 		headers.setContentType(MediaType.APPLICATION_JSON);
 		headers.add("userId", Integer.toString(userId));
 
 		HttpEntity<Product> entity = new HttpEntity<Product>(product,headers);
-		RestTemplateProvider.getRestTemplate().postForObject(PRODUCT_BASE_URL, entity, Category.class);
+		return RestTemplateProvider.getRestTemplate().postForObject(PRODUCT_BASE_URL, entity, Product.class);
 	}
 
 
 	public Product getObjectById(int id) {
-		UriComponentsBuilder builder = UriComponentsBuilder.fromHttpUrl(PRODUCT_BASE_URL)
-				.pathSegment(String.valueOf(id));
-		return RestTemplateProvider.getRestTemplate().getForObject(builder.build().encode().toUri(), Product.class);
+		return RestTemplateProvider.getRestTemplate().getForObject(PRODUCT_BASE_URL + "/" + String.valueOf(id),  Product.class);
 	}
 
 	public List<Product> getObjectList() {
@@ -61,4 +59,11 @@ public class ProductDAO {
 		Product[] products = RestTemplateProvider.getRestTemplate().getForObject(PRODUCT_BASE_URL, Product[].class);
 		return Arrays.asList(products);
 	}
+
+	static HttpHeaders createHeaderWithUserId(final int id) {
+		HttpHeaders headers = new HttpHeaders();
+		headers.add("userId", Integer.toString(id));
+		return headers;
+	}
+
 }
