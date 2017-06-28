@@ -35,9 +35,9 @@ public class ProductDAO {
 	}
 
 
-	public void deleteById(int id) {
-		UriComponentsBuilder builder = UriComponentsBuilder.fromHttpUrl(PRODUCT_BASE_URL).pathSegment(String.valueOf(id));
-		RestTemplateProvider.getRestTemplate().exchange(builder.build().encode().toUri(), HttpMethod.DELETE, null, Void.class);
+	public void deleteById(int id, int userId) {
+		HttpEntity<HttpHeaders> request = new HttpEntity<>(createHeaderWithUserId(userId));
+		RestTemplateProvider.getRestTemplate().exchange(PRODUCT_BASE_URL + "/{productId}", HttpMethod.DELETE, request, Void.class, id);
 	}
 
 	public Product saveObject(Product product, int userId) {

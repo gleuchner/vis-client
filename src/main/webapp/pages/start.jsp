@@ -91,7 +91,7 @@
 						<td class="odd"><s:property value="categoryId" /></td>
 										<td class="odd"><a href="./ProductDetailsAction.action?userId=<s:property value='userId'/>&id=<s:property value='productId'/>"><img src="img/detBtn.png" alt="<s:text name="product.details" />"/></a></td>
 						<s:if test="#session.webshop_user.role==2">
-							<td class="odd"><a href="./DeleteProductAction.action?userId=<s:property value='userId'/>"><img src="img/delBtn.png" alt="<s:text name="product.delete" />"/></a></td>
+							<td class="odd"><a href="./DeleteProductAction.action?id=<s:property value='productId'/>"><img src="img/delBtn.png" alt="<s:text name="product.delete" />"/></a></td>
 						</s:if>
 					</s:if>
 					<s:else>
@@ -101,7 +101,7 @@
 						<td><s:property value="categoryId" /></td>
 										<td><a href="./ProductDetailsAction.action?userId=<s:property value='userId'/>&id=<s:property value='productId'/>"><img src="img/detBtn.png" alt="<s:text name="product.details" />"/></a></td>
 						<s:if test="#session.webshop_user.role==2">
-							<td><a href="./DeleteProductAction.action?userId=<s:property value='userId'/>"><img src="img/delBtn.png" alt="<s:text name="product.delete" />"/></a></td>
+							<td><a href="./DeleteProductAction.action?id=<s:property value='productId'/>"><img src="img/delBtn.png" alt="<s:text name="product.delete" />"/></a></td>
 						</s:if>			
 					</s:else>
 					</tr>

@@ -1,5 +1,7 @@
 package hska.iwi.eShopMaster.controller;
 
+import hska.iwi.eShopMaster.model.businessLogic.manager.ProductManager;
+import hska.iwi.eShopMaster.model.businessLogic.manager.impl.ProductManagerImpl;
 import hska.iwi.eShopMaster.model.database.dataAccessObjects.ProductDAO;
 import hska.iwi.eShopMaster.model.database.dataobjects.User;
 
@@ -26,7 +28,7 @@ public class DeleteProductAction extends ActionSupport {
 		
 		if(user != null && (user.getRole() == 2)) {
 
-			new ProductDAO().deleteById(id);
+			new ProductManagerImpl().deleteProductById(id, user.getUserId());
 			{
 				res = "success";
 			}
