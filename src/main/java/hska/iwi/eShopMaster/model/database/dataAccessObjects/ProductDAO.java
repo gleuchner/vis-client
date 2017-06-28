@@ -49,10 +49,10 @@ public class ProductDAO {
                 .queryParam("query", searchDescription).queryParam("minPrice", searchMinPrice)
                 .queryParam("maxPrice", searchMaxPrice);
 
-        products = RestTemplateProvider.getRestTemplate().getForObject(builder.build().encode().toUri(),
-                products.getClass());
+        Product[] temp = RestTemplateProvider.getRestTemplate().getForObject(builder.build().encode().toUri(),
+                Product[].class);
 
-        return products;
+        return  Arrays.asList(temp);
     }
 
 

@@ -5,9 +5,11 @@ import hska.iwi.eShopMaster.model.businessLogic.manager.ProductManager;
 import hska.iwi.eShopMaster.model.businessLogic.manager.impl.CategoryManagerImpl;
 import hska.iwi.eShopMaster.model.businessLogic.manager.impl.ProductManagerImpl;
 import hska.iwi.eShopMaster.model.database.dataobjects.Category;
+import hska.iwi.eShopMaster.model.database.dataobjects.DisplayProduct;
 import hska.iwi.eShopMaster.model.database.dataobjects.Product;
 import hska.iwi.eShopMaster.model.database.dataobjects.User;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Locale;
 import java.util.Map;
@@ -31,7 +33,8 @@ public class SearchAction extends ActionSupport{
 	private Integer sMaxPrice = null;
 	
 	private User user;
-	private List<Product> products;
+	private List<Product> storedProducts;
+	private List<DisplayProduct> products  = new ArrayList<>();
 	private List<Category> categories;
 	
 
@@ -56,11 +59,24 @@ public class SearchAction extends ActionSupport{
 				Double tmp = Double.parseDouble(this.searchMaxPrice) * 100;
 				sMaxPrice = tmp.intValue();
 			}
-			this.products = productManager.getProductsForSearchValues(this.searchDescription, sMinPrice, sMaxPrice);
+			this.storedProducts = productManager.getProductsForSearchValues(this.searchDescription, sMinPrice, sMaxPrice);
 			
 			// Show all categories:
 			CategoryManager categoryManager = new CategoryManagerImpl();
 			this.categories = categoryManager.getCategories();
+
+			for (Product product: this.storedProducts) {
+
+				Category match = new Category("Error");
+				for (Category category: this.categories) {
+					if(category.getId() == product.getCategoryId()){
+						match = category;
+						break;
+					}
+				}
+				products.add(new DisplayProduct(product.getProductId(),product.getName(),product.getPrice(), match ,product.getDetails()));
+			}
+
 			result = "success";
 		}
 		
@@ -76,11 +92,11 @@ public class SearchAction extends ActionSupport{
 			this.user = user;
 		}
 		
-		public List<Product> getProducts() {
+		public List<DisplayProduct> getProducts() {
 			return products;
 		}
 
-		public void setProducts(List<Product> products) {
+		public void setProducts(List<DisplayProduct> products) {
 			this.products = products;
 		}
 		

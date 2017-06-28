@@ -1,10 +1,15 @@
 package hska.iwi.eShopMaster.controller;
 
+import hska.iwi.eShopMaster.model.businessLogic.manager.CategoryManager;
 import hska.iwi.eShopMaster.model.businessLogic.manager.ProductManager;
+import hska.iwi.eShopMaster.model.businessLogic.manager.impl.CategoryManagerImpl;
 import hska.iwi.eShopMaster.model.businessLogic.manager.impl.ProductManagerImpl;
+import hska.iwi.eShopMaster.model.database.dataobjects.Category;
+import hska.iwi.eShopMaster.model.database.dataobjects.DisplayProduct;
 import hska.iwi.eShopMaster.model.database.dataobjects.Product;
 import hska.iwi.eShopMaster.model.database.dataobjects.User;
 
+import java.util.List;
 import java.util.Map;
 
 import com.opensymphony.xwork2.ActionContext;
@@ -17,8 +22,9 @@ public class ProductDetailsAction extends ActionSupport {
 	private String searchValue;
 	private Integer searchMinPrice;
 	private Integer searchMaxPrice;
-	private Product product;
-
+	private Product storedproduct;
+	private DisplayProduct product;
+	private List<Category> categories;
 	/**
 	 * 
 	 */
@@ -33,8 +39,20 @@ public class ProductDetailsAction extends ActionSupport {
 		
 		if(user != null) {
 			ProductManager productManager = new ProductManagerImpl();
-			product = productManager.getProductById(id);
-			
+			storedproduct = productManager.getProductById(id);
+
+			//
+			CategoryManager categoryManager = new CategoryManagerImpl();
+			this.categories = categoryManager.getCategories();
+			Category match = new Category("Error");
+			for (Category category: this.categories) {
+				if(category.getId() == storedproduct.getCategoryId()){
+					match=category;
+					break;
+				}
+			}
+			product = new DisplayProduct(storedproduct.getProductId(),storedproduct.getName(), storedproduct.getPrice(), match, storedproduct.getDetails());
+
 			res = "success";			
 		}
 		
@@ -81,11 +99,11 @@ public class ProductDetailsAction extends ActionSupport {
 		this.searchMaxPrice = searchMaxPrice;
 	}
 
-	public Product getProduct() {
+	public DisplayProduct getProduct() {
 		return product;
 	}
 
-	public void setProduct(Product product) {
+	public void setProduct(DisplayProduct product) {
 		this.product = product;
 	}
 }
