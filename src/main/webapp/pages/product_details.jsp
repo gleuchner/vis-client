@@ -51,7 +51,7 @@
 				</tr>
 				<tr>
 					<td><s:text name="details.price" /></td>
-					<td><s:property value="product.price" /></td>
+					<td><s:property value="product.price / 100" /></td>
 				</tr>
 				<tr>
 					<td><s:text name="details.category" /></td>

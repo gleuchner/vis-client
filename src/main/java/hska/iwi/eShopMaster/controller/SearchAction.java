@@ -49,10 +49,12 @@ public class SearchAction extends ActionSupport{
 			ProductManager productManager = new ProductManagerImpl();
 //			this.products = productManager.getProductsForSearchValues(this.searchDescription, this.searchMinPrice, this.searchMaxPrice);
 			if (!searchMinPrice.isEmpty()){
-				sMinPrice =  Integer.parseInt(this.searchMinPrice);
+				Double tmp = Double.parseDouble(this.searchMinPrice) * 100;
+				sMinPrice = tmp.intValue();
 			}
 			if (!searchMaxPrice.isEmpty()){
-				sMaxPrice =  Integer.parseInt(this.searchMaxPrice);
+				Double tmp = Double.parseDouble(this.searchMaxPrice) * 100;
+				sMaxPrice = tmp.intValue();
 			}
 			this.products = productManager.getProductsForSearchValues(this.searchDescription, sMinPrice, sMaxPrice);
 			

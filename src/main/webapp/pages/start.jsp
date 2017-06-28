@@ -87,7 +87,7 @@
 					<s:if test="#rowstatus.odd == true">
 						<td class="odd"><s:property value="productId" />
 						<td class="odd"><s:property value="name" /></td>
-						<td class="odd"><s:property value="price" /></td>
+						<td class="odd"><s:property value="price / 100.0 " /></td>
 						<td class="odd"><s:property value="categoryId" /></td>
 										<td class="odd"><a href="./ProductDetailsAction.action?userId=<s:property value='userId'/>&id=<s:property value='productId'/>"><img src="img/detBtn.png" alt="<s:text name="product.details" />"/></a></td>
 						<s:if test="#session.webshop_user.role==2">
@@ -97,7 +97,7 @@
 					<s:else>
 						<td><s:property value="productId" />
 						<td><s:property value="name" /></td>
-						<td><s:property value="price" /></td>
+						<td><s:property value="price / 100.0 " /></td>
 						<td><s:property value="categoryId" /></td>
 										<td><a href="./ProductDetailsAction.action?userId=<s:property value='userId'/>&id=<s:property value='productId'/>"><img src="img/detBtn.png" alt="<s:text name="product.details" />"/></a></td>
 						<s:if test="#session.webshop_user.role==2">

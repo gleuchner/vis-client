@@ -31,7 +31,7 @@ public class AddProductAction extends ActionSupport {
 		if(user != null && (user.getRole() == 2)) {
 
 			ProductManager productManager = new ProductManagerImpl();
-			int productId = productManager.addProduct(name, Double.parseDouble(price), categoryId,
+			int productId = productManager.addProduct(name, Double.parseDouble(price)*100, categoryId,
 					details, user.getUserId());
 
 			if (productId > 0) {
