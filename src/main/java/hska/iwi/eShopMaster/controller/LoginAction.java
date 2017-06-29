@@ -41,7 +41,7 @@ public class LoginAction extends ActionSupport {
             addActionError("error.password.wrong");
             return result;
         }
-        RestTemplateProvider.createAndGetOAuth2RestTemplate(user.getUsername(), user.getUsername(), user.getRole());
+        RestTemplateProvider.createAndGetOAuth2RestTemplate(user.getUsername(), user.getPassword(), user.getRole());
 
         Map<String, Object> session = ActionContext.getContext().getSession();
 
